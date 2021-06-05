@@ -1,0 +1,12 @@
+{
+  "name": "indexodromo",
+  "version": "1.0.0",
+  "description": "Seleccion de indices para oposicion",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start" : "servor . index.html 4321 --reload"
+  },
+  "author": "jld86",
+  "license": "ISC"
+}

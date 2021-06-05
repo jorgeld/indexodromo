@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seleccionando numericos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;500;800;900&amp;display=swap" rel="stylesheet">
+</head>
+<body>
+    <style>
+        html,body{
+            font-family: 'Poppins';
+            background-color: #F25D50;
+            color: #F2E2CE;
+            margin: 0;
+        }
+
+        h1,h2,h3,h4,h5,p{
+            margin:0;
+            padding:0,
+        }
+
+        h1{
+            font-size: 4rem;
+        }
+
+        p{
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        body{
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cabecera{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        input{
+            border: none;
+            padding: 1rem;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: bold;
+        }
+
+        input:focus-visible{
+            outline: none;
+        }
+
+        button{
+            padding: 1rem;
+            border-radius: 5px;
+            border: none;
+            background-color: #F2E2CE;
+            color: #F25D50;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.25s ease-in-out
+        }
+
+        button:hover{
+            background-color: #d8c9b6;
+            color: white;
+        }
+
+        .accion{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .accion > input{
+            margin-bottom: 0.5rem;
+            min-width: 100%
+        }
+
+        
+        .resultado{
+            display: flex;
+            justify-content: center;
+        }
+
+        .resultado p{
+            color: #F2C3A7;
+            font-weight: bolder;
+            font-size: 6rem;
+        }
+
+        #elmRestantes{
+            font-size: 0.75rem;
+        }
+
+        button#reiniciar{
+            display: none;
+        }
+
+
+
+    </style>
+    <main>
+        <section class="cabecera">
+            <h1>Indexódromo</h1>
+            <p>Escribe los números de los temas separado por comas</p>
+            
+        </section>
+
+        <section class="accion">
+            <input type="text" id="numbers" name="numbers">
+            <button id="magicButton">Que se haga la magia!</button>
+            <button id="reiniciar">Volver a emprezar</button>
+            <p id="elmRestantes"></p>
+        </section>
+
+        <section class="resultado">
+            <p id="resultado"></p>
+        </section>
+
+    </main>
+
+    <script>
+
+        /** Constantes **/
+        const RESULTADO = document.getElementById('resultado');
+        const ELM_RESTANTES = document.getElementById('elmRestantes');
+        const INPUT_NUMBERS = document.getElementById('numbers');
+        const BUTTON = document.getElementById('magicButton');
+        const BUTTON_RESTART = document.getElementById('reiniciar');
+
+        /** Variables **/
+        var num_aux;
+
+        /** Funciones **/
+        function getRandomInt(min, max) {
+                return Math.floor(Math.random() * (max - min)) + min;
+        }
+
+        function ocultarElementos(){
+            ELM_RESTANTES.style.display = 'none'
+            RESULTADO.style.display = 'none'
+        }
+
+        function ocultarBoton(){
+            BUTTON.style.display = 'none'
+        }
+
+        function ocultarBotonRestart(){
+            BUTTON_RESTART.style.display = 'none'
+        }
+
+        function showElementos(){
+            ELM_RESTANTES.style.display = 'inherit'
+            RESULTADO.style.display = 'inherit'
+        }
+
+        function showRestartButton(){
+            BUTTON_RESTART.style.display = 'inherit'
+        }
+
+        function showMagicButton(){
+            BUTTON.style.display = 'inherit'
+        }
+
+        function habilitarInput(){
+            INPUT_NUMBERS.disabled = false;
+            INPUT_NUMBERS.style.cursor = 'text'
+        }
+
+        function deshabilitarInput(){
+            INPUT_NUMBERS.disabled = true;
+            INPUT_NUMBERS.style.cursor = 'not-allowed'
+        }
+
+        function reiniciarNumerosAux(){
+            n = false;
+        }
+
+        function restart(){
+            reiniciarNumerosAux()
+            ocultarElementos()
+            habilitarInput()
+
+            INPUT_NUMBERS.value = ''
+        }
+
+        function actualizarElementosRestantes(lgh){
+            ELM_RESTANTES.innerHTML = "Quedan "+lgh+" elementos restantes"
+        }
+
+        function setResult(elm){
+            RESULTADO.innerHTML = elm
+        }
+
+        function deleteNumber(position){
+            num_aux.splice(position,1)
+        }
+
+        ocultarElementos()
+
+        INPUT_NUMBERS.addEventListener('change', function(event){
+            num_aux = (event.target.value).split(',')
+        })
+
+        BUTTON_RESTART.addEventListener("click", function(){
+            restart();
+            ocultarBotonRestart()
+            showMagicButton();   
+        })
+        
+        BUTTON.addEventListener("click",function(){
+
+            showElementos()
+
+            /**var _inputNumbers = (INPUT_NUMBERS.value).split(',')**/
+
+            if(num_aux && num_aux.length > 0){
+               deshabilitarInput()
+               var position = getRandomInt(0,num_aux.length)
+               setResult(num_aux[position])
+               deleteNumber(position)
+               actualizarElementosRestantes(num_aux.length)
+               showElementos()
+               
+               if(num_aux.length === 0){
+                ocultarBoton()
+                ELM_RESTANTES.style.display = 'none'
+                showRestartButton()
+               }
+            }
+            
+
+
+
+            /**
+            if(!num_aux){
+
+                deshabilitarInput()
+                showElementos()
+
+                num_aux = _inputNumbers
+
+                var position = getRandomInt(0,num_aux.length)
+
+                setResult(num_aux[position])
+                
+                deleteNumber(position)
+                actualizarElementosRestantes(num_aux.length)
+
+            }else{
+
+                var position = getRandomInt(0,num_aux.length)
+
+                if(num_aux && num_aux.length === 0){
+                    habilitarInput()
+                    ocultarElementos()
+                    num_aux = null;
+                }else{
+                    setResult(_inputNumbers[position])
+                    deleteNumber(position)
+                    actualizarElementosRestantes(num_aux.length)
+                }   
+            }  
+
+            **/
+        })
+
+    </script>
+
+
+</body>
+</html>
