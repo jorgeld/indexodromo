@@ -9,6 +9,14 @@
 </head>
 <body>
     <style>
+
+        html{
+            background-image: url('./images/bck2.jpg');
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
         html,body{
             font-family: 'Poppins';
             background-color: #F25D50;
@@ -19,12 +27,6 @@
         h1,h2,h3,h4,h5,p{
             margin:0;
             padding:0,
-        }
-
-        @media all and (max-width: 400px) {
-            section.container h1 {
-                
-            }
         }
 
         section.container h1 {
@@ -38,6 +40,7 @@
 
         body{
             height: 100vh;
+            width: 100vw;
             display: flex;
             justify-content: center;
             background-image: url('./images/bck2.jpg');
@@ -69,7 +72,7 @@
             border: none;
             padding: 1rem;
             border-radius: 5px;
-            min-width: 350px;
+            min-width: auto;
             font-size: 1rem;
             font-weight: bold;
             margin-bottom: 0.5rem;
