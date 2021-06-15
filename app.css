@@ -1,0 +1,148 @@
+html{
+    background-image: url('../../Documents/GitHub/indexodromo/images/bck2.png');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+html,body{
+    font-family: 'Poppins';
+    background-color: #F25D50;
+    color: #F2E2CE;
+    margin: 0;
+}
+
+h1,h2,h3,h4,h5,p{
+    margin:0;
+    padding:0,
+}
+
+section.container h1 {
+    font-size: 3rem
+}
+
+main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    }
+
+p{
+    color: white;
+    font-size: 1.5rem;
+}
+
+body{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    background-image: url('../../Documents/GitHub/indexodromo/images/bck2.png');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.cabecera{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 6rem;
+    padding-bottom: 2rem;
+    text-align: center;
+}
+
+input{
+    border: none;
+    padding: 1rem;
+    border-radius: 5px;
+    min-width: 100%;
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+input:focus-visible{
+    outline: none;
+}
+
+button{
+
+    width: 50px;
+    height: 50px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+
+    margin: 1rem;
+    border-radius: 100%;
+    border: none;
+    background-color: #F2E2CE;
+    color: #F25D50;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.25s ease-in-out
+}
+
+button:hover{
+    background-color: #d8c9b6;
+    color: white;
+}
+
+.resultado{
+    display: flex;
+    justify-content: center;
+}
+
+.resultado p{
+    color: #F2C3A7;
+    font-weight: bolder;
+    font-size: 6rem;
+}
+
+#elmRestantes{
+    font-size: 0.75rem;
+    text-align: center;
+}
+
+button#reiniciar{
+    display: none;
+}
+
+.descripcion{
+    font-size: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+#resultado{
+    font-size: 6rem;
+    font-weight: bolder;
+}
+
+.menuButton{
+    position:absolute;
+    top:1rem;
+    right: 1rem;
+}
+
+.menuSection{
+    position: absolute;
+    top:0;
+    left: 0;
+    height: 100vh;
+    width: 0;
+    background-color: rgba(0, 0, 0, 0.31);
+    transition: width 0.5s
+}
+
+
