@@ -1,9 +1,3 @@
-html{
-    background-image: url('../../Documents/GitHub/indexodromo/images/bck2.png');
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-}
 
 html,body{
     font-family: 'Poppins';
@@ -14,7 +8,7 @@ html,body{
 
 h1,h2,h3,h4,h5,p{
     margin:0;
-    padding:0,
+    padding:0
 }
 
 section.container h1 {
@@ -37,7 +31,7 @@ body{
     width: 100vw;
     display: flex;
     justify-content: center;
-    background-image: url('../../Documents/GitHub/indexodromo/images/bck2.png');
+    background-image: url('./images/bck2.png');
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
