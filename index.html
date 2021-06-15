@@ -6,290 +6,183 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seleccionando numericos</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;500;800;900&amp;display=swap" rel="stylesheet">
+    <link href="./bundle.css" rel="stylesheet"/>
 </head>
 <body>
-    <style>
+<main>
 
-        html{
-            background-image: url('./images/bck2.jpg');
-            background-position: center;
-            background-size: cover;
-            background-repeat: no-repeat;
-        }
+    <div id="app"></div>
 
-        html,body{
-            font-family: 'Poppins';
-            background-color: #F25D50;
-            color: #F2E2CE;
-            margin: 0;
-        }
+</main>
 
-        h1,h2,h3,h4,h5,p{
-            margin:0;
-            padding:0,
-        }
+<script>
 
-        section.container h1 {
-            font-size: 3rem
-        }
-
-        p{
-            color: white;
-            font-size: 1.5rem;
-        }
-
-        body{
-            height: 100vh;
-            width: 100vw;
-            display: flex;
-            justify-content: center;
-            background-image: url('./images/bck2.jpg');
-            background-position: center;
-            background-size: cover;
-            background-repeat: no-repeat;
-        }
-
-        .container{
-            width: 95%;
-            display: flex;
-            flex-direction: column;
-            text-align: center;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .cabecera{
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding-top: 6rem;
-            padding-bottom: 2rem;
-            text-align: center;
-        }
-
-        input{
-            border: none;
-            padding: 1rem;
-            border-radius: 5px;
-            min-width: auto;
-            font-size: 1rem;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-        }
-
-        input:focus-visible{
-            outline: none;
-        }
-
-        button{
-            padding: 1rem;
-            border-radius: 5px;
-            border: none;
-            background-color: #F2E2CE;
-            color: #F25D50;
-            font-weight: bold;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.25s ease-in-out
-        }
-
-        button:hover{
-            background-color: #d8c9b6;
-            color: white;
-        }
-
-        .resultado{
-            display: flex;
-            justify-content: center;
-        }
-
-        .resultado p{
-            color: #F2C3A7;
-            font-weight: bolder;
-            font-size: 6rem;
-        }
-
-        #elmRestantes{
-            font-size: 0.75rem;
-            text-align: center;
-        }
-
-        button#reiniciar{
-            display: none;
-        }
-
-        .descripcion{
-            font-size: 1rem;
-        }
-
-        #resultado{
-            font-size: 6rem;
-            font-weight: bolder;
-        }
-
-
-
-    </style>
-   
-        <section class="container">
-                <h1>Indexódromo</h1>
-                <p class="descripcion">Escribe los números de los temas separado por comas</p>
-                <input type="text" id="numbers" name="numbers">
-                <button id="magicButton">Que se haga la magia!</button>
-                <button id="reiniciar">Volver a emprezar</button>
-                <p id="elmRestantes"></p>
-                <p id="resultado"></p>
-        </section>
-
-    <script>
-
-        /** Constantes **/
-        const RESULTADO = document.getElementById('resultado');
-        const ELM_RESTANTES = document.getElementById('elmRestantes');
-        const INPUT_NUMBERS = document.getElementById('numbers');
-        const BUTTON = document.getElementById('magicButton');
-        const BUTTON_RESTART = document.getElementById('reiniciar');
-
-        /** Variables **/
-        var num_aux;
-
-        /** Funciones **/
-        function getRandomInt(min, max) {
-                return Math.floor(Math.random() * (max - min)) + min;
-        }
-
-        function ocultarElementos(){
-            ELM_RESTANTES.style.display = 'none'
-            RESULTADO.style.display = 'none'
-        }
-
-        function ocultarBoton(){
-            BUTTON.style.display = 'none'
-        }
-
-        function ocultarBotonRestart(){
-            BUTTON_RESTART.style.display = 'none'
-        }
-
-        function showElementos(){
-            ELM_RESTANTES.style.display = 'block'
-            RESULTADO.style.display = 'block'
-        }
-
-        function showRestartButton(){
-            BUTTON_RESTART.style.display = 'block'
-        }
-
-        function showMagicButton(){
-            BUTTON.style.display = 'block'
-        }
-
-        function habilitarInput(){
-            INPUT_NUMBERS.disabled = false;
-            INPUT_NUMBERS.style.cursor = 'text'
-        }
-
-        function deshabilitarInput(){
-            INPUT_NUMBERS.disabled = true;
-            INPUT_NUMBERS.style.cursor = 'not-allowed'
-        }
-
-        function reiniciarNumerosAux(){
-            n = false;
-        }
-
-        function restart(){
-            reiniciarNumerosAux()
-            ocultarElementos()
-            habilitarInput()
-
-            INPUT_NUMBERS.value = ''
-        }
-
-        function actualizarElementosRestantes(lgh){
-            ELM_RESTANTES.innerHTML = "Quedan "+lgh+" elementos restantes"
-        }
-
-        function setResult(elm){
-            RESULTADO.innerHTML = elm
-        }
-
-        function deleteNumber(position){
-            num_aux.splice(position,1)
-        }
-
-        ocultarElementos()
-
-        INPUT_NUMBERS.addEventListener('change', function(event){
-            num_aux = (event.target.value).split(',')
-        })
-
-        BUTTON_RESTART.addEventListener("click", function(){
-            restart();
-            ocultarBotonRestart()
-            showMagicButton();   
-        })
-        
-        BUTTON.addEventListener("click",function(){
-
-            showElementos()
-
-            /**var _inputNumbers = (INPUT_NUMBERS.value).split(',')**/
-
-            if(num_aux && num_aux.length > 0){
-               deshabilitarInput()
-               var position = getRandomInt(0,num_aux.length)
-               setResult(num_aux[position])
-               deleteNumber(position)
-               actualizarElementosRestantes(num_aux.length)
-               showElementos()
-               
-               if(num_aux.length === 0){
-                ocultarBoton()
-                ELM_RESTANTES.style.display = 'none'
-                showRestartButton()
-               }
-            }
-            
+    //            /** Constantes **/
+    //            const RESULTADO = document.getElementById('resultado');
+    //            const ELM_RESTANTES = document.getElementById('elmRestantes');
+    //            const INPUT_NUMBERS = document.getElementById('numbers');
+    //            const BUTTON = document.getElementById('magicButton');
+    //            const BUTTON_RESTART = document.getElementById('reiniciar');
+    //
+    //            const BUTTON_MENU = document.getElementById('menuButton');
+    //            const MENU = document.getElementById('menuSection');
+    //
+    ////            BUTTON_MENU.addEventListener('click',function(){
+    ////                (menu_open)?hideMenu():showMenu();
+    ////            });
+    ////
+    ////            function hideMenu(){
+    ////                MENU.style.width = '0';
+    ////                menu_open = false
+    ////            }
+    ////
+    ////            function showMenu(){
+    ////                MENU.style.width = '250px';
+    ////                menu_open = true;
+    ////                window.open()
+    //            }
+    //
+    //            /** Variables **/
+    //            var num_aux;
+    //            var menu_open=false;
+    //
+    ////            /** Funciones **/
+    ////            function getRandomInt(min, max) {
+    ////                return Math.floor(Math.random() * (max - min)) + min;
+    ////            }
+    //
+    //            function ocultarElementos(){
+    //                ELM_RESTANTES.style.display = 'none'
+    //                RESULTADO.style.display = 'none'
+    //            }
+    //
+    //            function ocultarBoton(){
+    //                BUTTON.style.display = 'none'
+    //            }
+    //
+    //            function ocultarBotonRestart(){
+    //                BUTTON_RESTART.style.display = 'none'
+    //            }
+    //
+    //            function showElementos(){
+    //                ELM_RESTANTES.style.display = 'block'
+    //                RESULTADO.style.display = 'block'
+    //            }
+    //
+    //            function showRestartButton(){
+    //                BUTTON_RESTART.style.display = 'block'
+    //            }
+    //
+    //            function showMagicButton(){
+    //                BUTTON.style.display = 'block'
+    //            }
+    //
+    //            function habilitarInput(){
+    //                INPUT_NUMBERS.disabled = false;
+    //                INPUT_NUMBERS.style.cursor = 'text'
+    //            }
+    //
+    //            function deshabilitarInput(){
+    //                INPUT_NUMBERS.disabled = true;
+    //                INPUT_NUMBERS.style.cursor = 'not-allowed'
+    //            }
+    //
+    //            function reiniciarNumerosAux(){
+    //                n = false;
+    //            }
+    //
+    //            function restart(){
+    //                reiniciarNumerosAux()
+    //                ocultarElementos()
+    //                habilitarInput()
+    //
+    //                INPUT_NUMBERS.value = ''
+    //            }
+    //
+    //            function actualizarElementosRestantes(lgh){
+    //                ELM_RESTANTES.innerHTML = "Quedan "+lgh+" elementos restantes"
+    //            }
+    //
+    //            function setResult(elm){
+    //                RESULTADO.innerHTML = elm
+    //            }
+    //
+    //            function deleteNumber(position){
+    //                num_aux.splice(position,1)
+    //            }
+    //
+    //            ocultarElementos()
+    //
+    //            INPUT_NUMBERS.addEventListener('change', function(event){
+    //                num_aux = (event.target.value).split(',')
+    //            })
+    //
+    //            BUTTON_RESTART.addEventListener("click", function(){
+    //                restart();
+    //                ocultarBotonRestart()
+    //                showMagicButton();
+    //            })
+    //
+    //            BUTTON.addEventListener("click",function(){
+    //
+    //                showElementos()
+    //
+    //                /**var _inputNumbers = (INPUT_NUMBERS.value).split(',')**/
+    //
+    //                if(num_aux && num_aux.length > 0){
+    //                   deshabilitarInput()
+    //                   var position = getRandomInt(0,num_aux.length)
+    //                   setResult(num_aux[position])
+    //                   deleteNumber(position)
+    //                   actualizarElementosRestantes(num_aux.length)
+    //                   showElementos()
+    //
+    //                   if(num_aux.length === 0){
+    //                    ocultarBoton()
+    //                    ELM_RESTANTES.style.display = 'none'
+    //                    showRestartButton()
+    //                   }
+    //                }
+    //
 
 
 
-            /**
-            if(!num_aux){
+    /**
+     if(!num_aux){
 
-                deshabilitarInput()
-                showElementos()
+                    deshabilitarInput()
+                    showElementos()
 
-                num_aux = _inputNumbers
+                    num_aux = _inputNumbers
 
-                var position = getRandomInt(0,num_aux.length)
+                    var position = getRandomInt(0,num_aux.length)
 
-                setResult(num_aux[position])
-                
-                deleteNumber(position)
-                actualizarElementosRestantes(num_aux.length)
+                    setResult(num_aux[position])
 
-            }else{
-
-                var position = getRandomInt(0,num_aux.length)
-
-                if(num_aux && num_aux.length === 0){
-                    habilitarInput()
-                    ocultarElementos()
-                    num_aux = null;
-                }else{
-                    setResult(_inputNumbers[position])
                     deleteNumber(position)
                     actualizarElementosRestantes(num_aux.length)
-                }   
-            }  
 
-            **/
-        })
+                }else{
 
-    </script>
+                    var position = getRandomInt(0,num_aux.length)
 
+                    if(num_aux && num_aux.length === 0){
+                        habilitarInput()
+                        ocultarElementos()
+                        num_aux = null;
+                    }else{
+                        setResult(_inputNumbers[position])
+                        deleteNumber(position)
+                        actualizarElementosRestantes(num_aux.length)
+                    }
+                }
+
+     **/
+    //            })
+
+</script>
+
+<script src="bundle.js"></script>
 
 </body>
 </html>
